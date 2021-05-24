@@ -3,12 +3,14 @@ circle = document.getElementsByClassName('circle')[0],
 timeSpan = document.getElementById('timeSpan'),
 totalSpan = document.getElementById('totalSpan'),
 dateSpan = document.getElementById('dateSpan'),
+clearLocal = document.getElementById('clearLocal'),
 currentCigs,
 totalCigs,
 lastCig;
 
 setVars();
 newDayBtn.addEventListener('click',resetDay);
+clearLocal.addEventListener('click',clearLocalStorage);
 circle.addEventListener('click',update);
 
 
@@ -33,6 +35,8 @@ function updateView() {
   setInterval(() => {
     if (lastCig) {
       timeSpan.innerHTML = lastCig.fromNow();
+    }else{
+      timeSpan.innerHTML = 'Never';
     }
   },1000);
 
@@ -83,4 +87,9 @@ function updateVars() {
 function setDate() {
   localStorage.startingDate = new Date().toDateString();
   dateSpan.innerHTML = localStorage.startingDate;
+}
+
+function clearLocalStorage(){
+  localStorage.clear();
+  location.reload();
 }
